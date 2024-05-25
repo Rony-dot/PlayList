@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 import { getPlayList } from './services/PlayListController'
 import NavBar from './components/NavBar';
 import "./css/home.css"
+import Loader from './components/Loader';
 
 
 function App() {
-  // const [Link, setLink] = useState('')
+  const [Loading, setLoading] = useState(false)
   const [Video, setVideo] = useState({
     "id": 0,
     "title": "Video 0",
@@ -19,10 +20,12 @@ function App() {
   const [PlayList, setPlayList] = useState([])
 
   useEffect(() => {
+    setLoading(true)
     getPlayList()
       .then((response) => {
         setPlayList(response.data)
       }).finally(() => {
+        setLoading(false)
       })
   }, [])
 
@@ -31,15 +34,17 @@ function App() {
     setVideo(video)
   }
 
+  // if (Loading) return <Loader />
   return (
     <div className="App">
       <NavBar />
-      <div className='row'>
-        <div className='col-9 border-end border-5 border-warning'>
-          <ViedeoPlayer video={Video} />
-        </div>
-        <div className='col-3 border-start border-5 border-warning'>
+      {Loading && <Loader />}
+      <div className='row mx-3'>
+        <div className='col-3 m-0 p-2'>
           <VideoList className="col-3" PlayList={PlayList} handleOnClick={handleOnClick} />
+        </div>
+        <div className='col-9 m-0 p-2 '>
+          {!Loading && <ViedeoPlayer video={Video} />}
         </div>
       </div>
     </div>

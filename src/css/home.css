@@ -1,11 +1,30 @@
 body {
-    background-color: #F6DCAC;
+    /* background-color: #F6DCAC; */
+    background-color: #344955;
 }
 
 .playlist-group {
-    background-color: #028391;
+    /* background-color: #028391; */
+    background-color: #50727B;
+}
+
+.playlist-group:hover {
+    /* background-color: #028391; */
+    background-color: #6d9aa7;
 }
 
 .playlist-item {
-    background-color: #FEAE6F;
+    /* background-color: #FEAE6F; */
+    background-color: #7077A1;
+}
+
+.playlist-item:hover {
+    background-color: #7c85b7;
+}
+
+.handle-overflow {
+    overflow: hidden; 
+    display:inline-block;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
 }
