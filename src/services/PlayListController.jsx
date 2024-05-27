@@ -13,3 +13,19 @@ export const getPlayList = (requestParams) => {
         requestParams
     });
 }
+
+export const getCompletedCount = (requestParams) => {
+    return CallPlayListService({
+        method: "GET",
+        url: "/getCompletedCount",
+        requestParams
+    });
+}
+
+export const getTotalVideosCount = (requestParams) => {
+    return CallPlayListService({
+        method: "GET",
+        url: "/getTotalVideosCount",
+        requestParams
+    });
+}
