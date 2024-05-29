@@ -56,7 +56,7 @@ function App() {
   }
 
   const handleOnClickCompleted = (video) => {
-    console.log("video checkbox clicked");
+    console.log("video checkbox clicked ");
     console.table(video);
     // PlayList.find(group => group.videos.find(item => item.id === video.id))
   }

@@ -28,3 +28,11 @@ body {
     text-overflow: ellipsis; 
     white-space: nowrap;
 }
+
+.sub-small {
+    font-size: 13px;
+}
+
+.sub-sub-small {
+    font-size: 12px;
+}
