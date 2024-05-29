@@ -55,6 +55,12 @@ function App() {
     setVideo(video)
   }
 
+  const handleOnClickCompleted = (video) => {
+    console.log("video checkbox clicked");
+    console.table(video);
+    // PlayList.find(group => group.videos.find(item => item.id === video.id))
+  }
+
   // if (Loading) return <Loader />
   return (
     <div className="App">
@@ -62,7 +68,7 @@ function App() {
       {Loading && <Loader />}
       <div className='row mx-3'>
         <div className='col-3 m-0 p-2'>
-          <VideoList className="col-3" PlayList={PlayList} handleOnClick={handleOnClick} />
+          <VideoList className="col-3" PlayList={PlayList} handleOnClick={handleOnClick} handleOnClickCompleted={handleOnClickCompleted} />
         </div>
         <div className='col-9 m-0 p-2 '>
           {!Loading && <ViedeoPlayer video={Video} />}

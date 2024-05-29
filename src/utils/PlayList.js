@@ -7,13 +7,15 @@ export const PlayList = [
                 "id": 1,
                 "title": "Video 1",
                 "url": "https://www.youtube.com/watch?v=RVwm8OiJa_A",
-                "completed": true
+                "completed": true,
+                "duration": 15
             },
             {
                 "id": 2,
                 "title": "Video 2",
                 "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                "completed": false
+                "completed": false,
+                "duration": 10
             }
         ]
     },
@@ -25,19 +27,22 @@ export const PlayList = [
                 "id": 3,
                 "title": "Video 3",
                 "url": "https://www.youtube.com/watch?v=3JZ_D3ELwOQ",
-                "completed": true
+                "completed": true,
+                "duration": 5
             },
             {
                 "id": 4,
                 "title": "Video 4",
                 "url": "https://www.youtube.com/watch?v=l482T0yNkeo",
-                "completed": false
+                "completed": false,
+                "duration": 1
             },
             {
                 "id": 5,
                 "title": "Video 5",
                 "url": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
-                "completed": false
+                "completed": false,
+                "duration": 8
             }
         ]
     },
@@ -49,13 +54,15 @@ export const PlayList = [
                 "id": 6,
                 "title": "Video 6",
                 "url": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
-                "completed": false
+                "completed": false,
+                "duration": 15
             },
             {
                 "id": 7,
                 "title": "Video 7",
                 "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU",
-                "completed": false
+                "completed": false,
+                "duration": 15
             }
         ]
     },
@@ -67,7 +74,8 @@ export const PlayList = [
                 "id": 8,
                 "title": "Video 8",
                 "url": "https://www.youtube.com/watch?v=VbfpW0pbvaU",
-                "completed": false
+                "completed": false,
+                "duration": 15
             }
         ]
     }
