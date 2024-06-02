@@ -1,7 +1,47 @@
 import React, { useState } from 'react'
 
-const VideoList = ({ PlayList, handleOnClick, handleOnClickCompleted }) => {
+const VideoList = ({ PlayList, handleOnClick, setPlayList }) => {
     const [SelectedItem, setSelectedItem] = useState({})
+    const [Completed, setCompleted] = useState(false)
+    const [CompletedVideoGroup, setCompletedVideoGroup] = useState({
+        "id": -1,
+        "title": "group minus -1",
+        "videos": [
+            {
+                "id": -1,
+                "title": "video minus -1",
+                "url": "#",
+                "completed": false,
+                "duration": 0
+            }
+        ]
+    })
+    const handleOnChange = (e) => {
+        const { id, value } = e.target
+        // console.log("group id: " + id + ", video value: " + value);
+        // find:: the clicked video's group
+        const effectedGroup = PlayList.find(group => { return group.id === Number(id) })
+        // console.table(effectedGroup)
+        // console.log("== effectedGroup.videos ==");
+        // console.table(effectedGroup.videos)
+        // find:: now the clicked video from that group
+        // const effectedVideos = effectedGroup.videos.map(video => video.id === Number(value) ? { ...video, "completed": !video.completed } : video)
+        // console.log("== effectedVideos ==");
+        // console.table(effectedVideos)
+        // update:: update the video's attribute "completed" in that group, and set it to a new object
+        setCompletedVideoGroup({ ...effectedGroup, "videos": [...effectedGroup.videos.map(video => video.id === Number(value) ? { ...video, "completed": !video.completed } : video)] })
+        // console.log("== completedVideoGroup.videos ==");
+        // console.table(CompletedVideoGroup.videos);
+        // console.log("== completedVideoGroup ==");
+        // console.table(CompletedVideoGroup);
+        // console.log(CompletedVideoGroup);
+
+        // update:: update the main Playlist's group, with that new updated group in it
+        setPlayList([...PlayList.map(group => group.id === CompletedVideoGroup.id ? CompletedVideoGroup : group)])
+        // todo: need to complete, (checkbox click => mark as complete)
+        // handleOnClickCompleted(id, value)
+    }
+
     const handleSelectItem = (item) => {
         if (SelectedItem.id === item.id) {
             return setSelectedItem({})
@@ -57,22 +97,17 @@ const VideoList = ({ PlayList, handleOnClick, handleOnClickCompleted }) => {
                             </div>
                         </li>
                         {SelectedItem.id === item.id && item.videos.map((video, j) => (
-                            <li key={j} onClick={() => handleOnClick(video)} className="ps-2 handle-overflow playlist-item list-group-item list-group-item-action">
+                            <li key={j} className="ps-2 handle-overflow playlist-item list-group-item list-group-item-action">
                                 <div className="row p-0 m-0 small text-start">
                                     <div className="col-md-1">
                                         <div className="form-check py-0 my-0">
-                                            <input onClick={() => handleOnClickCompleted(video)} className="form-check-input" type="checkbox" value="" id="isCompleted" checked={video.completed} />
+                                            <input onChange={handleOnChange} className="form-check-input" type="checkbox" value={video.id} id={item.id} checked={video.completed} />
                                         </div>
                                     </div>
-                                    <div className="col-md-11 ">
+                                    <div className="col-md-11" onClick={() => handleOnClick(video)} >
                                         <p className='py-0 my-0 sub-small'>{video.title}</p>
-                                    </div>
-                                </div>
-                                <div className="row p-0 m-0 mt-1 small">
-                                    <div className="col-md-1"></div>
-                                    <div className="col-md-11 text-start ">
-                                        <p className='p-0 m-0 sub-sub-small'>
-                                            <i class="bi bi-play-btn"></i>
+                                        <p className='m-0 my-1 sub-sub-small'>
+                                            <i className="bi bi-play-btn"></i>
                                             &nbsp;{calculateMinuteFromMilis(video.duration)}
                                         </p>
                                     </div>

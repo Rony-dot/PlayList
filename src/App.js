@@ -22,6 +22,7 @@ function App() {
     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "completed": false
   })
+  const [CompletedVideo, setCompletedVideo] = useState({})
   const [PlayList, setPlayList] = useState([])
   const [CompletedCount, setCompletedCount] = useState(0)
   const [CountTotalVideos, setCountTotalVideos] = useState(0)
@@ -55,10 +56,13 @@ function App() {
     setVideo(video)
   }
 
-  const handleOnClickCompleted = (video) => {
-    console.log("video checkbox clicked ");
-    console.table(video);
-    // PlayList.find(group => group.videos.find(item => item.id === video.id))
+  // Todo: still not completed
+  const handleOnClickCompleted = (groupId, videoId) => {
+    const something = PlayList.filter(group => group.id === Number(groupId))[0].videos.filter(video => video.id === Number(videoId))[0]
+    console.table(something);
+    setCompletedVideo({ ...something, "completed": !something.completed })
+    console.table(CompletedVideo);
+    setPlayList([...PlayList, PlayList.map(group => group.id === Number(groupId) ? { ...group, ...group.videos = [group.videos, ...group.videos.map(video => video.id === Number(videoId) ? something : video)] } : group)])
   }
 
   // if (Loading) return <Loader />
@@ -68,7 +72,7 @@ function App() {
       {Loading && <Loader />}
       <div className='row mx-3'>
         <div className='col-3 m-0 p-2'>
-          <VideoList className="col-3" PlayList={PlayList} handleOnClick={handleOnClick} handleOnClickCompleted={handleOnClickCompleted} />
+          <VideoList className="col-3" PlayList={PlayList} handleOnClick={handleOnClick} setPlayList={setPlayList} />
         </div>
         <div className='col-9 m-0 p-2 '>
           {!Loading && <ViedeoPlayer video={Video} />}
